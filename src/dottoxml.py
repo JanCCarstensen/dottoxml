@@ -117,7 +117,7 @@ def exportGraphml(o, nodes, edges, options):
     data.appendChild(res)    
     root.appendChild(data)
     
-    o.write(doc.toxml(encoding="utf-8"))
+    o.write(doc.toprettyxml(indent="  ", encoding="utf-8"))
 
 def exportGDF(o, nodes, edges, options):
     o.write("nodedef> name\n")

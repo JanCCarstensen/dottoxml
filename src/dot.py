@@ -241,6 +241,8 @@ class Node:
         line = line.rstrip()
         # Process label
         self.label = line.strip('"')
+        print self.label
+        print "\n"
         # Process attributes
         if len(atts):
             self.attribs = parseAttributes(atts)
@@ -248,8 +250,8 @@ class Node:
         if self.attribs.has_key("label"):
             tlabel = self.attribs["label"]
             if (tlabel != "" and     
-                tlabel.startswith('{') and
-                tlabel.endswith('}')):
+                tlabel.startswith('"') and
+                tlabel.endswith('"')):
                 tlabel = tlabel[1:-1]
                 self.sections = getLabelAttributes(tlabel)
 
@@ -444,10 +446,10 @@ class Edge:
         line = line.rstrip(';')
         line = line.rstrip()
         # Process labels
-        ll = line.replace('->',' ').split()
+        ll = line.split('->')
         if len(ll) > 1:
-            self.src = ll[0].strip('"')
-            self.dest = ll[1].strip('"')
+            self.src = ll[0].strip(' ').strip('"')
+            self.dest = ll[1].strip(' ').strip('"')
         # Process attributes
         if len(atts):
             self.attribs = parseAttributes(atts)
